@@ -35,6 +35,37 @@ router.post('/', function(req, res, next) {
   return res.status(201).send(newBook);
 });
 
+/* UPDATE book */
+router.put('/:id', function(req, res, next) {
+  const id = req.params.id;
+  const payload = req.body;
+
+  const oldBook = bookArray.find(book => book.id === id);
+
+  if (!oldBook) {
+    return res.status(404).json({ message: `Book id not found: ${id}` });
+  }
+
+  const updatedBook = oldBook;
+  if (payload.name) {
+    updatedBook.name = payload.name;
+  }
+
+  if (payload.author) {
+    updatedBook.author = payload.author;
+  }
+
+  if (payload.publishingYear) {
+    updatedBook.publishingYear = payload.publishingYear;
+  }
+
+  if (payload.isbnNumber) {
+    updatedBook.isbnNumber = payload.isbnNumber;
+  }
+
+  return res.status(200).send(updatedBook);
+});
+
 /* DELETE book */
 router.delete('/:id', function(req, res, next) {
   const id = req.params.id;
