@@ -16,5 +16,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/books', booksRouter);
+app.use('*', function(req, res){
+    return res.status(404).json({ message: 'Invalid route!' });
+});
 
 module.exports = app;
