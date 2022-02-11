@@ -35,4 +35,17 @@ router.post('/', function(req, res, next) {
   return res.status(201).send(newBook);
 });
 
+/* DELETE book */
+router.delete('/:id', function(req, res, next) {
+  const id = req.params.id;
+  const index = bookArray.findIndex(book => book.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ message: `Book id not found: ${id}` });
+  }
+
+  bookArray.splice(index, 1);
+  return res.status(200).json({ message: `Deleted book with id: ${id}` });
+});
+
 module.exports = router;
