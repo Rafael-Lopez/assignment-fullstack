@@ -6,8 +6,11 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router';
 
 const Book = ( {book} ) => {
+    const navigate = useNavigate();
+
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -15,6 +18,7 @@ const Book = ( {book} ) => {
         axios.delete(`/books/${id}`)
             .then( response => {
                 setShow(false);
+                navigate('/books');
             });
     };
 
