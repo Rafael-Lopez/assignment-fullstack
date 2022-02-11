@@ -11,7 +11,7 @@ const BookList = () => {
     const [ books, setBooks ] = useState([]);
 
     useEffect(() => {
-        axios.get( process.env.REACT_APP_API_URL + "/books")
+        axios.get('/books')
             .then( response => {
                 setBooks( response.data );
             }

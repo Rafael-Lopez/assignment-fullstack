@@ -12,7 +12,7 @@ const Book = ( {book} ) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const handleDelete= (id) => {
-        axios.delete( process.env.REACT_APP_API_URL + "/books/" + id)
+        axios.delete(`/books/${id}`)
             .then( response => {
                 setShow(false);
             });
