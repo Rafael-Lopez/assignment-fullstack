@@ -79,3 +79,29 @@ export const addBook = (book) => {
         });
     };
 };
+
+const editBookAction = (book) => {
+    return {
+        type: actionTypes.EDIT_BOOK,
+        payload: book
+    };
+};
+
+const editBookFailed = () => {
+    return {
+        type: actionTypes.EDIT_BOOK_FAILED,
+		payload: "Error while editing book!"
+    };
+};
+
+export const editBook = (book) => {
+    return dispatch => {
+        axios.put(`/books/${book.id}`, JSON.stringify(book), {headers: {'Content-Type': 'application/json'}})
+            .then( response => {
+                dispatch( editBookAction(response.data) );
+            }
+        ).catch(error => {
+                dispatch( editBookFailed() );
+        });
+    };
+};

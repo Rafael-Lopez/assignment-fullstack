@@ -3,13 +3,15 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { addBook } from '../../store/actions';
+import { addBook, editBook } from '../../store/actions';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
-const EditBook = ( {book} ) => {
+const EditBook = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { state } = useLocation();
+    const book = state ? state.book : null;
 
     const onFormSubmit = e => {
         e.preventDefault();
@@ -17,10 +19,15 @@ const EditBook = ( {book} ) => {
         const name = e.target.elements.name.value;
         const author = e.target.elements.author.value;
         const publishingYear = e.target.elements.publishingYear.value;
-        const isbn = e.target.elements.isbn.value;
+        const isbnNumber = e.target.elements.isbn.value;
 
-        dispatch( addBook({name, author, publishingYear, isbn}) );
-
+        if (book) {
+            const id = book.id;
+            dispatch( editBook({id, name, author, publishingYear, isbnNumber}) );
+        } else {
+            dispatch( addBook({name, author, publishingYear, isbnNumber}) );
+        }
+        
         navigate('/');
     }
 
@@ -32,19 +39,19 @@ const EditBook = ( {book} ) => {
                     <Form onSubmit={onFormSubmit}>
                         <Form.Group className="mb-3" controlId="name">
                             <Form.Label>Name</Form.Label>
-                            <Form.Control type="text" placeholder="Book name" />
+                            <Form.Control type="text" placeholder="Book name" defaultValue={book ? book.name : ''} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="author">
                             <Form.Label>Author</Form.Label>
-                            <Form.Control type="text" placeholder="Author" />
+                            <Form.Control type="text" placeholder="Author" defaultValue={book ? book.author : ''} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="publishingYear">
                             <Form.Label>Publishing Year</Form.Label>
-                            <Form.Control type="text" placeholder="Publishing Year" />
+                            <Form.Control type="text" placeholder="Publishing Year" defaultValue={book ? book.publishingYear : ''} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="isbn">
                             <Form.Label>ISBN</Form.Label>
-                            <Form.Control type="text" placeholder="ISBN" />
+                            <Form.Control type="text" placeholder="ISBN" defaultValue={book ? book.isbnNumber : ''} />
                         </Form.Group>
                         <Button variant="primary" type="submit">
                             Submit

@@ -8,17 +8,23 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { deleteBook } from '../../store/actions';
+import { useNavigate } from 'react-router';
 
 const Book = ( {book} ) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const handleDelete= (id) => {
+    const handleDelete = (id) => {
         dispatch( deleteBook(id) );
         setShow(false);
     };
+
+    const handleEdit = () => {
+        navigate('/edit', { state: { book } });
+    }
 
     return (
         <Card className='m-2'>
@@ -29,6 +35,7 @@ const Book = ( {book} ) => {
                 <Card.Text>ISBN: {book.isbnNumber}</Card.Text>
                 <Container>
                 <Row className="justify-content-md-center">
+                    <Col><Button variant="success" className='w-100' onClick={handleEdit}>Edit</Button></Col>
                     <Col><Button variant="danger" className='w-100' onClick={handleShow}>Delete</Button></Col>
                 </Row></Container>
             </Card.Body>

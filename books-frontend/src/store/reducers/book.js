@@ -41,7 +41,24 @@ const book = (state = initialState, action) => {
                 ...state,
                 loading: false, 
                 error: action.payload 
-            };        
+            }; 
+        case actionTypes.EDIT_BOOK:
+            const book = state.books.find(book => book.id === action.payload.id);
+            book.name = action.payload.name;
+            book.author = action.payload.author;
+            book.publishingYear = action.payload.publishingYear;
+            book.isbnNumber = action.payload.isbnNumber;
+            
+            return {
+                ...state,
+                books: state.books
+            };  
+        case actionTypes.EDIT_BOOK_FAILED:
+                return {
+                    ...state,
+                    loading: false, 
+                    error: action.payload 
+                };             
         default:
             return state;
     }
