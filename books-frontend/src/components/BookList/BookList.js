@@ -1,24 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Alert from 'react-bootstrap/Alert';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Spinner from 'react-bootstrap/Spinner';
-import axios from 'axios';
 
 import Book from "../Book/Book";
+import { initBooks } from '../../store/actions';
 
 const BookList = () => {
-    const [ books, setBooks ] = useState([]);
+    const dispatch = useDispatch();
+    const bookList = useSelector((state) => state.bookList);
+    const {loading, error, books} = bookList;
 
     useEffect(() => {
-        axios.get('/books')
-            .then( response => {
-                setBooks( response.data );
-            }
-        )}, []);
+        dispatch( initBooks() )
+    }, [dispatch]);
 
-    if (books.length === 0) {
+    if (loading) {
         return <Spinner animation="border" role="status"><span className="visually-hidden">Loading...</span></Spinner>;
+    }
+
+    if (error) {
+        return <Alert variant={'danger'}>{error}</Alert>
     }
 
     return (
