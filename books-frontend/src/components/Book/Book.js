@@ -5,21 +5,19 @@ import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
+
+import { deleteBook } from '../../store/actions';
 
 const Book = ( {book} ) => {
-    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const handleDelete= (id) => {
-        axios.delete(`/books/${id}`)
-            .then( response => {
-                setShow(false);
-                navigate('/books');
-            });
+        dispatch( deleteBook(id) );
+        setShow(false);
     };
 
     return (

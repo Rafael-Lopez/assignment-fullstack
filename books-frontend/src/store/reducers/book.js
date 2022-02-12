@@ -16,9 +16,21 @@ const book = (state = initialState, action) => {
             };
         case actionTypes.GET_BOOKS_FAILED:
             return {
+                ...state,
                 loading: false, 
                 error: action.payload 
+            };
+        case actionTypes.DELETE_BOOK:
+            return {
+                ...state,
+                books: state.books.filter(book => action.payload !== book.id)
             };  
+        case actionTypes.DELETE_BOOK_FAILED:
+            return {
+                ...state,
+                loading: false, 
+                error: action.payload 
+            };      
         default:
             return state;
     }
