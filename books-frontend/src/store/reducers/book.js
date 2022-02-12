@@ -30,7 +30,18 @@ const book = (state = initialState, action) => {
                 ...state,
                 loading: false, 
                 error: action.payload 
-            };      
+            };  
+        case actionTypes.ADD_BOOK:
+            return {
+                ...state,
+                books: [...state.books, action.payload]
+            };  
+        case actionTypes.ADD_BOOK_FAILED:
+            return {
+                ...state,
+                loading: false, 
+                error: action.payload 
+            };        
         default:
             return state;
     }

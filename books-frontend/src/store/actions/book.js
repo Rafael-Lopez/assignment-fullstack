@@ -53,3 +53,29 @@ export const deleteBook = (id) => {
         });
     };
 };
+
+const addBookAction = (book) => {
+    return {
+        type: actionTypes.ADD_BOOK,
+        payload: book
+    };
+};
+
+const addBookFailed = () => {
+    return {
+        type: actionTypes.ADD_BOOK_FAILED,
+		payload: "Error while adding book!"
+    };
+};
+
+export const addBook = (book) => {
+    return dispatch => {
+        axios.post('/books', JSON.stringify(book), {headers: {'Content-Type': 'application/json'}})
+            .then( response => {
+                dispatch( addBookAction(response.data) );
+            }
+        ).catch(error => {
+                dispatch( addBookFailed() );
+        });
+    };
+};

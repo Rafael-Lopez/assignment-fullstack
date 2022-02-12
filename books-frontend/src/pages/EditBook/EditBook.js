@@ -3,8 +3,14 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { addBook } from '../../store/actions';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 const EditBook = ( {book} ) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const onFormSubmit = e => {
         e.preventDefault();
         
@@ -13,8 +19,9 @@ const EditBook = ( {book} ) => {
         const publishingYear = e.target.elements.publishingYear.value;
         const isbn = e.target.elements.isbn.value;
 
-        console.log(name, author, publishingYear, isbn);
-        console.log(book);
+        dispatch( addBook({name, author, publishingYear, isbn}) );
+
+        navigate('/');
     }
 
     return (
