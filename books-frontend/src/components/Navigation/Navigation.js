@@ -7,10 +7,10 @@ const Navigation = () => {
     return (
         <Navbar bg="primary" variant="dark" className='mb-3' >
             <Container>
-                <Navbar.Brand as={Link} to='/books'>Home</Navbar.Brand>
+                <Navbar.Brand as={Link} to='/'>Home</Navbar.Brand>
                 <Nav className="me-auto">
-                    <Nav.Link as={Link} to='/books'>Add</Nav.Link>
-                    <Nav.Link as={Link} to='/books'>Edit</Nav.Link>
+                    <Nav.Link as={Link} to='/'>Add</Nav.Link>
+                    <Nav.Link as={Link} to='/'>Edit</Nav.Link>
                 </Nav>
             </Container>
         </Navbar>
