@@ -3,9 +3,11 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from "react-router-dom";
 
+import './Navigation.scss';
+
 const Navigation = () => {
     return (
-        <Navbar bg="primary" variant="dark" className='mb-3' >
+        <Navbar bg="primary" className='mb-3' >
             <Container>
                 <Navbar.Brand as={Link} to='/'>Home</Navbar.Brand>
                 <Nav className="me-auto">

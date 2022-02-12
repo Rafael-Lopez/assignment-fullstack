@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 
 import { deleteBook } from '../../store/actions';
 import { useNavigate } from 'react-router';
+import './Book.scss';
 
 const Book = ( {book} ) => {
     const dispatch = useDispatch();
