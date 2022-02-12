@@ -9,7 +9,7 @@ const Navigation = () => {
             <Container>
                 <Navbar.Brand as={Link} to='/'>Home</Navbar.Brand>
                 <Nav className="me-auto">
-                    <Nav.Link as={Link} to='/'>Add</Nav.Link>
+                    <Nav.Link as={Link} to='/new'>Add</Nav.Link>
                     <Nav.Link as={Link} to='/'>Edit</Nav.Link>
                 </Nav>
             </Container>
