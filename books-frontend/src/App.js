@@ -1,15 +1,15 @@
 import { Routes, Route } from "react-router-dom";
 import './App.css';
 
-import BookList from './components/BookList/BookList';
 import Navigation from "./components/Navigation/Navigation";
+import Home from "./pages/Home/Home";
 
 function App() {
   return (
     <div className="App">
       <Navigation/>
       <Routes>
-        <Route path="/" element={<BookList/>} />
+        <Route path="/" element={<Home/>} />
       </Routes>
     </div>
   );
